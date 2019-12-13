@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  
+  <head>
+    <title>Exam Timer</title>
+  <style type="text/css">
+    @font-face {
+	font-family: "Computer Modern";
+	src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
+    }
+    @font-face {
+	font-family: "Computer Modern";
+	src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsx.otf');
+	font-weight: bold;
+    }
+    @font-face {
+	font-family: "Computer Modern";
+	src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunsi.otf');
+	font-style: italic, oblique;
+    }
+    @font-face {
+	font-family: "Computer Modern";
+	src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunbxo.otf');
+	font-weight: bold;
+	font-style: italic, oblique;
+    }
+
+    body {
+	font-family: "Computer Modern";
+    font-size: 200px;
+    }
+
+    p {text-align: center;}
+
+    .black-on-white {
+    color: black;
+    background-color: white;
+    }
+
+    .white-on-black {
+    background-color: black;
+    color: white;
+    }
+
+    .fixedtime {
+    float: left;
+    width: 33.33%;
+    padding: 0px;
+    text-align: center;
+    font-size: 40px;
+    display: inline-block;}
+
+    .end {float: right;}
+
+    .timecontainer {height: 70px;}
+    <!--.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+    }-->
+
+
+  </style>
+</head>
+
+  <body id="body">
+    <div class="timecontainer">
+    <!--div class="clearfix"-->
+      <div class="fixedtime" id="start-time">Start Time</div>
+      <div class="fixedtime" id="current-time">Current Time</div>
+      <div class="fixedtime" id="end-time">End Time</div>
+    </div>
+
+    <p id="clock">clock</p>
+
+    <script src="clock.js"></script>
+</font>
+</body>
+ 
