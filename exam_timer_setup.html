@@ -3,7 +3,7 @@
   
   <head>
     <title>Exam Timer Setup</title>
-  <style type="text/css">
+    <style type="text/css">
     @font-face {
 	font-family: "Computer Modern";
 	src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');
@@ -38,100 +38,98 @@
        font-color: white;
        background-color: black;
        font-family: "Computer Modern";}
-  </style>
-</head>
+    </style>
+  </head>
+	
+  <body>
+    <!-- Create the form for entering dates and times. -->
+    <form id="form"; action="./test_clock.html"; method="get">
+      <!-- Set up label for the start date. -->
+      <!-- In this usage, the label tag simply displays text near
+	   the field. -->
+      <label for="start_date";
+	     style="font-size:50px; color:white; float: left">Start date:</label>
+      <!-- Set up the input field for the start date. -->
+      <input type="date";
+	     title="Start Date";
+	     id="start_date";
+	     name="start_date";
+	     value="";
+	     style="float: left; height:50px; font-size: 40px";
+	     required /> <br><br>
 
-  <!-- Create the form for entering dates and times. -->
-  <form id="form"; action="./test_clock.html"; method="get">
-    <!-- Set up the start date. -->
-    <!-- In this usage, the label tag simply displays text near
-	 the field. -->
-    <label for="start_date";
-	   style="font-size:50px; color:white; float: left">Start date:</label>
-    <!-- Set up the input field for the start date. -->
-    <input type="date";
-	   title="Start Date";
-	   id="start_date";
-	   name="start_date";
-	   value="";
-	   style="float: left; height:50px; font-size: 40px";
-	   required /> <br><br>
+      <!-- Set up label for the end date. -->
+      <label for="end_date";
+	     style="font-size:50px; color:white; float:left">End date:</label>
+      <!-- Set up the input field for the end date. -->
+      <input type="date";
+	     title="End Date";
+	     id="end_date";
+	     name="end_date";
+	     value="";
+	     style="font-size: 40px; height:50px; float:left";
+	     required /><br><br>    
+    
+      <!-- Set up label for the start time. -->
+      <label for="start_time";
+	     style="font-size:50px; color:white; float: left">Start time:</label>    
+      <!-- Set up the input field for the start time. -->    
+      <input type="time";
+	     title="Start Time";
+	     id="start_time";
+	     name="start_time";
+	     value="";
+	     style="float: left; font-size:40px; height:50px";
+	     required /><br /><br />
+    
+      <!-- Set up label for the end time. -->
+      <label for="end_time";
+	     style="font-size:50px; color:white; float: left">End time:</label>
+      <!-- Set up the input field for the end time. -->	    
+      <input type="time";
+	     title="End Time";
+	     id="end_time";
+	     name="end_time";
+	     value="";
+	     style = "float: left; font-size:40px; height:50px;";
+	     required /><br /><br />
+	    
+      <!-- Set up the submit button and confirm when clicked. -->
+      <input type="submit" value="Set up timer!" onclick="initialize()" style="font-size:40px; float: left; height:50px;">
+    </form>
 
+    <!-- The following script grabs current date/time and tries to guess when exam will start and end.
+         This can occasionally save some time during setup. -->
+    <script type="text/javascript">
+      var d = new Date(); // Get current date+time.
+      var day_fix = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12); // Format date and time in standard way.
+      var start = new Date();
+      document.getElementById("start_time").innerHTML = start.toLocaleTimeString('en-US', {
+        hour:'2-digit',
+        hour12: false,
+        minute: '2-digit'});
+
+      var year = start.getFullYear();
+      var month = start.getMonth();
+      var day = start.getDate();
+      var hours = start.getHours();
+      var minutes = start.getMinutes();
+      var seconds = start.getSeconds();
+	  
+      // Assuming setup is being completed for exam starting at top of next hour.
+      if (minutes > 0) {
+        minutes = "00";
+        hours = hours + 1;
+      }
+
+      // Add a zero to the hour if it's less than 10.
+      if (hours < 10) hours = "0" + hours;
+
+      document.getElementById("start_time").value = hours + ":" + minutes;
+      document.getElementById("end_time").value = hours + ":" + "50";
+      document.getElementById("end_date").valueAsDate = day_fix;
+      document.getElementById("start_date").valueAsDate = day_fix;
 
     </script>
-    <label for="end_date";
-	   style="font-size:50px; color:white; float:left">End date:</label>
-    <input type="date";
-	   title="End Date";
-	   id="end_date";
-	   name="end_date";
-	   value="";
-	   style="font-size: 40px; height:50px; float:left";
-	   required /><br><br>    
-    
-    <label for="start_time";
-	   style="font-size:50px; color:white; float: left">Start time:</label>
-    
-    
-    <input type="time";
-	   title="Start Time";
-	   id="start_time";
-	   name="start_time";
-	   value="";
-	   style="float: left; font-size:40px; height:50px";
-	   required /><br /><br />
-    
-    <!--p id="start_timep";
-       style="color:white">store date</p -->
-
-    
-    <label for="end_time";
-	   style="font-size:50px; color:white; float: left">End time:</label>
-    
-    <input type="time";
-	   title="End Time";
-	   id="end_time";
-	   name="end_time";
-	   value="";
-	   style = "float: left; font-size:40px; height:50px;";
-	   required /><br /><br />
-    <input type="submit" value="Set up timer!" onclick="initialize()" style="font-size:40px; float: left; height:50px;">
-</form>
-
-<script type="text/javascript">
-
-  var d = new Date();
-  var day_fix = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 12);
-  var start = new Date();
-  document.getElementById("start_time").innerHTML = start.toLocaleTimeString('en-US', {
-  hour:'2-digit',
-  hour12: false,
-  minute: '2-digit'});
-
-  var year = start.getFullYear();
-  var month = start.getMonth();
-  var day = start.getDate();
-  var hours = start.getHours();
-  var minutes = start.getMinutes();
-  var seconds = start.getSeconds();
-  if (minutes > 0) {
-minutes = "00";
-hours = hours + 1;
-}
-
-if (hours < 10) hours = "0" + hours;
-
-//document.write(hours + ":" + minutes + ":" + seconds);
-document.getElementById("start_time").value = hours + ":" + minutes;
-//document.write(document.getElementById("start_time").value);
-//document.write(start.getHours());
-//document.write(hours + " + " + minutes)
-	    document.getElementById("end_time").value = hours + ":" + "50";
-
-	      document.getElementById("end_date").valueAsDate = day_fix;
-  document.getElementById("start_date").valueAsDate = day_fix;
-
-</script>
-  
-</body>
+  </body>
 </html>
